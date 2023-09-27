@@ -5,7 +5,7 @@ protocol ProfileViewProtocol: AnyObject {
 }
 
 class ProfileView: UIView {
-  // MARK: - UI properties
+    // MARK: - UI properties
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -57,16 +57,6 @@ class ProfileView: UIView {
     }()
     
     internal weak var delegate: ProfileViewProtocol?
-    
-    public init(viewModel: ProfileViewModel, frame: CGRect) {
-        super.init(frame: frame)
-        
-        applyViewCode()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func layoutSubviews() { // method that is called once the layout is already defined
         super.layoutSubviews()
@@ -148,14 +138,3 @@ extension ProfileView: ViewCodeProtocol {
     }
     
 }
-
-/** to SetupConstraints
- 1 . First element of the relation
- 2. Second element of the relation
- 3. Anchor of the first element
- 4. Anchor of the second element
- 5. Constant
-    handling a dynamic constraint example:
- var shouldDeclareConstraint = true
- firstLabel.bottomAnchor.constraint(equalTo: secondLabel.topAnchor, constant: 12).isActive = shouldDeclareConstraint
-*/

@@ -1,14 +1,12 @@
 import Foundation
 
 protocol ProfileViewModelProtocol: AnyObject {
-    func profileViewModelUpdateProfileView(
-        image: String,
-        name: String,
-        age: String,
-        occupation: String,
-        gender: String,
-        isFollow: Bool
-    )
+    func profileViewModelUpdateProfileView(image: String,
+                                           name: String,
+                                           age: String,
+                                           occupation: String,
+                                           gender: String,
+                                           isFollow: Bool)
 }
 
 public class ProfileViewModel {
