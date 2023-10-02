@@ -1,11 +1,11 @@
 import UIKit
 
-protocol ProfileViewProtocol: AnyObject {
+protocol AssembliemanViewProtocol: AnyObject {
     func profileViewDidPressFollowButton()
 }
 
-class ProfileView: UIView {
-  // MARK: - UI properties
+class AssembliemanView: UIView {
+    // MARK: - UI properties
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -51,16 +51,15 @@ class ProfileView: UIView {
     }()
     
     private lazy var followButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-       return button
+        return button
     }()
     
-    internal weak var delegate: ProfileViewProtocol?
+    internal weak var delegate: AssembliemanViewProtocol?
     
-    public init(viewModel: ProfileViewModel, frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
-        
         applyViewCode()
     }
     
@@ -80,7 +79,7 @@ class ProfileView: UIView {
     // you should notify that a layout change is needed and call setNeedsLayout
 }
 
-extension ProfileView: ViewCodeProtocol {
+extension AssembliemanView: ViewCodeProtocol {
     
     private enum profileConstants {
         static let imageLeading: CGFloat = 16
@@ -108,7 +107,7 @@ extension ProfileView: ViewCodeProtocol {
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: profileConstants.imageLeading),
             imageView.heightAnchor.constraint(equalToConstant: profileConstants.imageHeight),
             imageView.widthAnchor.constraint(equalToConstant: profileConstants.imageWidth),
-
+            
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: profileConstants.stackTop),
             stackView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: profileConstants.imageToStackSpacing),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: profileConstants.stackTrailing),
@@ -150,12 +149,12 @@ extension ProfileView: ViewCodeProtocol {
 }
 
 /** to SetupConstraints
- 1 . First element of the relation
- 2. Second element of the relation
- 3. Anchor of the first element
- 4. Anchor of the second element
- 5. Constant
-    handling a dynamic constraint example:
- var shouldDeclareConstraint = true
- firstLabel.bottomAnchor.constraint(equalTo: secondLabel.topAnchor, constant: 12).isActive = shouldDeclareConstraint
-*/
+     1 . First element of the relation
+     2. Second element of the relation
+     3. Anchor of the first element
+     4. Anchor of the second element
+     5. Constant
+     handling a dynamic constraint example:
+     var shouldDeclareConstraint = true
+     firstLabel.bottomAnchor.constraint(equalTo: secondLabel.topAnchor, constant: 12).isActive = shouldDeclareConstraint
+ */

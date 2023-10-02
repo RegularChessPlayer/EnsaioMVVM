@@ -2,13 +2,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private lazy var profileViewModel = ProfileViewModel()
+    private lazy var assembliemanViewModel = AssembliemanViewModel() //
     
-    private lazy var mockProfileView: ProfileView = {
-        let profileView = ProfileView(
-            viewModel: profileViewModel,
-            frame: CGRect(origin: .zero, size: .zero)
-        )
+    private lazy var assembliemanProfileView: AssembliemanView = {
+        let profileView = AssembliemanView(frame: CGRect(origin: .zero, size: .zero))
         profileView.translatesAutoresizingMaskIntoConstraints = false
         return profileView
     }()
@@ -16,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         applyViewCode()
-        profileViewModel.loadAssembliemanDataInfo()
+        assembliemanViewModel.loadAssembliemanDataInfo()
     }
 
 }
@@ -30,20 +27,20 @@ extension ViewController: ViewCodeProtocol {
     }
     
     internal func buildViewHierarchy() {
-        view.addSubview(mockProfileView)
+        view.addSubview(assembliemanProfileView)
     }
     
     internal func setupConstraints() {
         NSLayoutConstraint.activate([
-            mockProfileView.topAnchor.constraint(
+            assembliemanProfileView.topAnchor.constraint(
                 equalTo: view.topAnchor,
                 constant: Constants.profileTop
             ),
-            mockProfileView.leadingAnchor.constraint(
+            assembliemanProfileView.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: Constants.profileLeading
             ),
-            mockProfileView.trailingAnchor.constraint(
+            assembliemanProfileView.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: Constants.profileTrailing
             ),
@@ -51,22 +48,22 @@ extension ViewController: ViewCodeProtocol {
     }
     
     internal func configureViews() {
-        mockProfileView.delegate = self //binding view
-        profileViewModel.delegate = self
-        profileViewModel.updateView()
+        assembliemanProfileView.delegate = self //binding view
+        assembliemanViewModel.delegate = self
+        assembliemanViewModel.updateView()
     }
     
 }
 
-extension ViewController: ProfileViewProtocol {
+extension ViewController: AssembliemanViewProtocol {
     
     internal func profileViewDidPressFollowButton() {
-        profileViewModel.profileViewDidPressFollowButton()
+        assembliemanViewModel.profileViewDidPressFollowButton()
     }
     
 }
 
-extension ViewController: ProfileViewModelProtocol {
+extension ViewController: AssembliemanViewModelProtocol {
     
     internal func profileViewModelUpdateProfileView(
         image: String,
@@ -76,7 +73,7 @@ extension ViewController: ProfileViewModelProtocol {
         gender: String,
         isFollow: Bool
     ) {
-        mockProfileView.fillProfileInfo(
+        assembliemanProfileView.fillProfileInfo(
             image: image,
             name: name,
             age: age,

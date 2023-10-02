@@ -1,6 +1,6 @@
 import Foundation
 
-protocol ProfileViewModelProtocol: AnyObject {
+protocol AssembliemanViewModelProtocol: AnyObject {
     func profileViewModelUpdateProfileView(
         image: String,
         name: String,
@@ -11,12 +11,12 @@ protocol ProfileViewModelProtocol: AnyObject {
     )
 }
 
-public class ProfileViewModel {
+public class AssembliemanViewModel {
     
-    internal weak var delegate: ProfileViewModelProtocol?
+    internal weak var delegate: AssembliemanViewModelProtocol?
     private let assembliemanService = AssemblyManService()
     
-    private var profile = Profile(
+    private var profile = Assemblieman(
         image: "profile01",
         name: "Thiago R.",
         age: "30",
@@ -32,7 +32,7 @@ public class ProfileViewModel {
             switch result {
             case .success(let response):
                 if let assemblieMan = response.dados.first {
-                    self.profile = Profile(
+                    self.profile = Assemblieman(
                         image: assemblieMan.urlFoto,
                         name: assemblieMan.email,
                         age: "30",
@@ -45,6 +45,18 @@ public class ProfileViewModel {
                 self.updateView()
             case .failure(let error):
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    internal func loadAssembliemanDataInfoNetworkingRequest() {
+        NetwokingRequest.load(Assemblyman.all) { [weak self] result in
+            guard let self = self else  { return }
+            switch result {
+            case .success((let statusCode, let dataDecoder)):
+                print(dataDecoder)
+            case .failure(let error):
+                print(error)
             }
         }
     }

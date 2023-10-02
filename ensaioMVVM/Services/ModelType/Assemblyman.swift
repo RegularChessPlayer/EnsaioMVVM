@@ -18,3 +18,17 @@ internal struct Assemblyman: Codable {
     let urlFoto: String
     
 }
+
+extension URL {
+    static var allAssemblyman: URL {
+        return  URL(string: "https://dadosabertos.camara.leg.br/api/v2/deputados?ordem=ASC&ordenarPor=nome")!
+    }
+}
+
+extension Assemblyman {
+    
+    static var all: Resource<[Assemblyman]> {
+        return Resource(url: URL.allAssemblyman)
+    }
+    
+}

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Profile {
+struct Assemblieman {
     let image: String
     let name: String
     let age: String // date and stored property to return string
